@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Define All Variables
     @State private var newNumber = Int.random(in: 1...100)
     @State private var numCorrectAnswers = 0
     @State private var numWrongAnswers = 0
