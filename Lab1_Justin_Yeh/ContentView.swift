@@ -57,23 +57,24 @@ struct ContentView: View {
         }
         .onAppear { timer() }
         .alert(isPresented: $showResult) {
-        Alert(
-            title: Text("Answer Results"),
-            message: Text("Correct Answers: \(numCorrectAnswers)\nWrong Answers: \(numWrongAnswers)"),
-            dismissButton: .default(Text("OK")) {
-                            }
-        )
-        
-        }        }
+            Alert(
+                title: Text("Answer Results"),
+                message: Text("Correct Answers: \(numCorrectAnswers)\nWrong Answers: \(numWrongAnswers)"),
+                dismissButton: .default(Text("OK")) {
+                    showResult = false
+                    numAttempts = 0
+                    numCorrectAnswers = 0
+                    numWrongAnswers = 0
+                }
+            )
+        }
+    }
     // Created the function to move to the next number after
     func moveToNextNumber() {
             
         numAttempts = numAttempts + 1
         if numAttempts >= 10 {
             showResult = true
-            numCorrectAnswers = 0
-            numWrongAnswers = 0
-            numAttempts = 0
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
