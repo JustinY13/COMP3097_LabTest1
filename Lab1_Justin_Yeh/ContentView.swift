@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var numAttempts = 0
     @State private var result = false
     @State private var correct: Bool? = nil
+    @State private var showResult = false
     var body: some View {
         VStack {
             Text("\(newNumber)")
@@ -55,13 +56,23 @@ struct ContentView: View {
             }
         }
         .onAppear { timer() }
-    }
+        .alert(isPresented: $showResult) {
+        Alert(
+            title: Text("Results"),
+            message: Text("Correct: \(numCorrectAnswers)\nWrong: \(numWrongAnswers)"),
+            dismissButton: .default(Text("OK")) {
+            }
+        )
+        
+        }        }
+    // Created the function to move to the next number after
     func moveToNextNumber() {
+            
         numAttempts = numAttempts + 1
-        //if numAttempts >= 10 {
-          //  result = true
-         //   return
-       // }
+        if numAttempts >= 10 {
+            showResult = true
+            numAttempts = 0
+       }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             newNumber = Int.random(in: 1...100)
             correct = nil
