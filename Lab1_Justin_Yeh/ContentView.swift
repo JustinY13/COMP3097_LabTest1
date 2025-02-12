@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var showResult = false
     var body: some View {
         VStack {
+            // Created the font and padding for the number that changes every 5 seconds
             Text("\(newNumber)")
                 .font(.system(size: 70, weight: .bold))
                 .padding()
