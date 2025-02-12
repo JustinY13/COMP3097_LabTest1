@@ -23,6 +23,7 @@ struct ContentView: View {
                 .padding()
             
             VStack {
+                // Created button for Prime Number
                 Button(action: { validateResponse(isPrimeSelected: true) }) {
                     Text("Prime")
                         .padding()
