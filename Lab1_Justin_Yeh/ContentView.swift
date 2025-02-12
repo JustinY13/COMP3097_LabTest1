@@ -98,27 +98,31 @@ struct ContentView: View {
     // Check to see if the number is prime or not, if the user is correct then the number of correct answers goes up by 1, else the number of wrong answers goes up by 1
     func validateResponse(isPrimeSelected: Bool) {
         var isNumberPrime: Bool = true
-        
+        // if the number is less than 2, then the number is not considered prime
         if newNumber < 2 {
-            isNumberPrime = false    }
+            isNumberPrime = false }
         else {
+            // if the number is divisible by any other number than it is not considered prime
             for i in 2..<newNumber {
                 if newNumber % i == 0 {
                     isNumberPrime = false
                     break }
             }
         }
+        // if the answer is prime then add the number of correct answers by 1 and set the correct boolean to true
         if isPrimeSelected == isNumberPrime {
             numCorrectAnswers = numCorrectAnswers + 1
             correct = true
         } else {
+            // if the number is not prime then add the number of wrong answers by 1 and set the correct boolean to false
             numWrongAnswers = numWrongAnswers + 1
             correct = false}
-        
         moveToNextNumber()
     }
         
 }
+
+// Shows the layout
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
