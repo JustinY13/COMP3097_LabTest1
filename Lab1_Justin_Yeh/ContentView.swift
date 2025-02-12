@@ -83,7 +83,7 @@ struct ContentView: View {
             timer()
         }
     }
-    
+    // Created the timer to change the number after 5 seconds and to add an incorrect answer after the user doesn't respond
     func timer() {
         timeLimit?.invalidate()
         timeLimit = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) {
