@@ -33,7 +33,7 @@ struct ContentView: View {
                         .font(.title2)
                         .cornerRadius(12)
                 }
-                
+                // Created button for Non Prime Number
                 Button(action: { validateResponse(isPrimeSelected: false) }) {
                     Text("Not Prime")
                         .padding()
