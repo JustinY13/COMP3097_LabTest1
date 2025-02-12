@@ -11,7 +11,6 @@ struct ContentView: View {
     @State private var newNumber = Int.random(in: 1...100)
     @State private var numCorrectAnswers = 0
     @State private var numWrongAnswers = 0
-    @State private var isAnswerCorrect: Bool? = nil
     @State private var timeLimit: Timer? = nil
     @State private var numAttempts = 0
     @State private var result = false
@@ -42,31 +41,36 @@ struct ContentView: View {
                         .foregroundColor(.black)
                         .cornerRadius(12)
                 }
-            }            
+            }
             .padding()
-            if let isCorrect = isAnswerCorrect {
+            if let isCorrect = correct {
                 Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
                     .resizable()
                     .frame(width: 70, height: 70)
                     .foregroundColor(isCorrect ? .green : .red)
                     .padding()
-            }        }
+            }
+        }
+        .onAppear { timer() }
     }
     func moveToNextNumber() {
         numAttempts = numAttempts + 1
-        if numAttempts >= 10 {
-            result = true
-            return
+        //if numAttempts >= 10 {
+          //  result = true
+         //   return
+       // }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            newNumber = Int.random(in: 1...100)
+            correct = nil
+            timer()
         }
-        newNumber = Int.random(in: 1...100)
-        correct = nil
-        timer()
     }
     func timer() {
         timeLimit?.invalidate()
         timeLimit = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) {
             _ in
             numWrongAnswers = numWrongAnswers + 1
+            correct = false
             moveToNextNumber()
         }
     }
@@ -84,14 +88,13 @@ struct ContentView: View {
         }
         if isPrimeSelected == isNumberPrime {
             numCorrectAnswers = numCorrectAnswers + 1
-            isAnswerCorrect = true
+            correct = true
         } else {
             numWrongAnswers = numWrongAnswers + 1
-            isAnswerCorrect = false}
-        }
+            correct = false}
         
+        moveToNextNumber()        }
         
-   
 }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
