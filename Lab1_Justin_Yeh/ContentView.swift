@@ -45,6 +45,7 @@ struct ContentView: View {
                 }
             }
             .padding()
+            // Created green checkmark and red X for correct and incorrect answers
             if let isCorrect = correct {
                 Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
                     .resizable()
