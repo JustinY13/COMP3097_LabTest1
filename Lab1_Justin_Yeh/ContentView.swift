@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var numCorrectAnswers = 0
     @State private var numWrongAnswers = 0
     @State private var isAnswerCorrect: Bool? = nil
+    @State private var timeLimit: Timer? = nil
     var body: some View {
         VStack {
             Text("\(newNumber)")
@@ -47,6 +48,13 @@ struct ContentView: View {
                     .foregroundColor(isCorrect ? .green : .red)
                     .padding()
             }        }
+    }
+    func timer() {
+        timeLimit?.invalidate()
+        timeLimit = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) {
+            _ in
+            numWrongAnswers = numWrongAnswers + 1
+        }
     }
     func validateResponse(isPrimeSelected: Bool) {
         var isNumberPrime: Bool = true
