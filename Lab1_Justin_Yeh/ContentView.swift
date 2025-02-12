@@ -56,6 +56,7 @@ struct ContentView: View {
             }
         }
         .onAppear { timer() }
+        // Created Alert to show the Correct and Incorrect answers after 10 attempts
         .alert(isPresented: $showResult) {
             Alert(
                 title: Text("Answer Results"),
