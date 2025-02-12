@@ -93,7 +93,7 @@ struct ContentView: View {
             moveToNextNumber()
         }
     }
-    
+    // Check to see if the number is prime or not, if the user is correct then the number of correct answers goes up by 1, else the number of wrong answers goes up by 1
     func validateResponse(isPrimeSelected: Bool) {
         var isNumberPrime: Bool = true
         
@@ -113,7 +113,8 @@ struct ContentView: View {
             numWrongAnswers = numWrongAnswers + 1
             correct = false}
         
-        moveToNextNumber()        }
+        moveToNextNumber()
+    }
         
 }
 struct ContentView_Previews: PreviewProvider {
