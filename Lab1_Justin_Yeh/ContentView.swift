@@ -8,17 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var newNumber = Int.random(in: 1...100)
+
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("\(newNumber)")
+                .font(.system(size: 70, weight: .bold))
+                .padding()
+            
+            VStack {
+                Button {
+                    Text("Prime")
+                        .padding()
+                        .frame(width: 150, height: 75)
+                        .background(Color.white)
+                        .foregroundColor(.black)
+                        .font(.title2)
+                        .cornerRadius(12)
+                }
+                
+                Button {
+                    Text("Not Prime")
+                        .padding()
+                        .frame(width: 150, height: 75)
+                        .font(.title2)
+                        .background(Color.white)
+                        .foregroundColor(.black)
+                        .cornerRadius(12)
+                }
+            }
+            .padding()
         }
-        .padding()
-    }
-}
+       
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
