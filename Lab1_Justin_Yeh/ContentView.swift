@@ -42,34 +42,23 @@ struct ContentView: View {
         }
     }
     func checkAnswer(isPrimeSelected: Bool) {
-        let isActuallyPrime = isNumberPrime(newNumber)
-        
-        if isPrimeSelected == isActuallyPrime {
-            numCorrectAnswers += 1
-            isAnswerCorrect = true
-        } else {
-            numWrongAnswers += 1
-            isAnswerCorrect = false
-        }
-    }
-}
-func isNumberPrime(_ num: Int) -> Bool {
-    if num < 2 {
-        return false
-    }
-    else {
-        for i in 2..<num {
-            if num % i == 0 {
-                return false
+        var isNumberPrime: Bool? = true        //let isActuallyPrime =  if num < 2 {
+        if newNumber < 2 {
+            isNumberPrime = false    }
+        else {
+            for i in 2..<newNumber {
+                if newNumber % i == 0 {
+                    isNumberPrime = false }
             }
-        return true
+            
+            if isPrimeSelected == isNumberPrime {
+                numCorrectAnswers = numCorrectAnswers + 1
+                isAnswerCorrect = true
+            } else {
+                numWrongAnswers = numWrongAnswers + 1
+                isAnswerCorrect = false
+            }
         }
-        
-        //guard num > 1 else { return false }
-        //for i in 2..<num {
-        //    if num % i == 0 { return false }
-        //}
-        //return true
     }
 }
 struct ContentView_Previews: PreviewProvider {
