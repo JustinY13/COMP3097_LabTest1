@@ -19,7 +19,7 @@ struct ContentView: View {
                 .padding()
             
             VStack {
-                Button(action: { checkAnswer(isPrimeSelected: true) }) {
+                Button(action: { validateResponse(isPrimeSelected: true) }) {
                     Text("Prime")
                         .padding()
                         .frame(width: 150, height: 75)
@@ -29,7 +29,7 @@ struct ContentView: View {
                         .cornerRadius(12)
                 }
                 
-                Button(action: { checkAnswer(isPrimeSelected: false) }) {
+                Button(action: { validateResponse(isPrimeSelected: false) }) {
                     Text("Not Prime")
                         .padding()
                         .frame(width: 150, height: 75)
@@ -38,28 +38,38 @@ struct ContentView: View {
                         .foregroundColor(.black)
                         .cornerRadius(12)
                 }
-            }            .padding()
-        }
+            }            
+            .padding()
+            if let isCorrect = isAnswerCorrect {
+                Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
+                    .resizable()
+                    .frame(width: 70, height: 70)
+                    .foregroundColor(isCorrect ? .green : .red)
+                    .padding()
+            }        }
     }
-    func checkAnswer(isPrimeSelected: Bool) {
-        var isNumberPrime: Bool? = true        //let isActuallyPrime =  if num < 2 {
+    func validateResponse(isPrimeSelected: Bool) {
+        var isNumberPrime: Bool = true
+        
         if newNumber < 2 {
             isNumberPrime = false    }
         else {
             for i in 2..<newNumber {
                 if newNumber % i == 0 {
-                    isNumberPrime = false }
-            }
-            
-            if isPrimeSelected == isNumberPrime {
-                numCorrectAnswers = numCorrectAnswers + 1
-                isAnswerCorrect = true
-            } else {
-                numWrongAnswers = numWrongAnswers + 1
-                isAnswerCorrect = false
+                    isNumberPrime = false
+                    break }
             }
         }
-    }
+        if isPrimeSelected == isNumberPrime {
+            numCorrectAnswers = numCorrectAnswers + 1
+            isAnswerCorrect = true
+        } else {
+            numWrongAnswers = numWrongAnswers + 1
+            isAnswerCorrect = false}
+        }
+        
+        
+   
 }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
