@@ -58,10 +58,10 @@ struct ContentView: View {
         .onAppear { timer() }
         .alert(isPresented: $showResult) {
         Alert(
-            title: Text("Results"),
-            message: Text("Correct: \(numCorrectAnswers)\nWrong: \(numWrongAnswers)"),
+            title: Text("Answer Results"),
+            message: Text("Correct Answers: \(numCorrectAnswers)\nWrong Answers: \(numWrongAnswers)"),
             dismissButton: .default(Text("OK")) {
-            }
+                            }
         )
         
         }        }
@@ -71,14 +71,18 @@ struct ContentView: View {
         numAttempts = numAttempts + 1
         if numAttempts >= 10 {
             showResult = true
+            numCorrectAnswers = 0
+            numWrongAnswers = 0
             numAttempts = 0
-       }
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             newNumber = Int.random(in: 1...100)
             correct = nil
             timer()
         }
     }
+    
     func timer() {
         timeLimit?.invalidate()
         timeLimit = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) {
@@ -88,6 +92,7 @@ struct ContentView: View {
             moveToNextNumber()
         }
     }
+    
     func validateResponse(isPrimeSelected: Bool) {
         var isNumberPrime: Bool = true
         
